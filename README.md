@@ -19,7 +19,7 @@ alt=" Scarecrow">
 &nbsp;&nbsp;&nbsp;&nbsp; The automated scarecrow can be broken down into three parts: scarecrow design, the remote-controlled (RC) car, and wiring. All 3D-printable files and code are linked and can also be found in the files of this repository.
 ### Scarecrow
 
-<h4> Materials <h4/>
+#### Materials 
 
 * [3D printed block](https://github.com/w-faulkner/ScarecrowProject/blob/main/Modeling%20Files/block.stl)
 * [3D printed bottom plate](https://github.com/w-faulkner/ScarecrowProject/blob/main/Modeling%20Files/bottomplate.stl)
@@ -42,7 +42,8 @@ alt=" Scarecrow">
 * 2 – [N20 D.C. gear motor](https://www.amazon.com/HiLetgo-GA12-N20-Reduction-Deceleration-Multiple/dp/B0CHRWJFMD/ref=sr_1_1_sspa?crid=1UWUQYJH2Z44A&dib=eyJ2IjoiMSJ9.28lLgs4tN8_uzq37orPhGNrmqvpzNurPIL7GqTF3LXUk1kr0vyS2dZLTpcw4IEImtsXeztT4OeQGx72YsGbL_RfdrVeu6fY7fLCQNymgr1G6w91EgWPyTyAolZG69jDDaHggPqrepHuBBJVuDTeCshhubb9incal-ZPy897YSRq_KCPCCDYmD3kUtpr_QY_PLSVonsoOZWlwZEwdb12VkKt014k8HkPXGxQmVnkTwy6ItEfpqBgjTlK4mmYE8va_i2UrL8T1Fs7uaBlnuGyWKDFM3Ldgs1UV27RDNNAyGa0.yihXsrzs3lBFqq-tMH2DvShOYLEiXrUqBnnqz4P-axE&dib_tag=se&keywords=n20+gear+motor&qid=1746061690&sprefix=n20+ge%2Caps%2C153&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1)
 * [Super Glue](https://www.amazon.com/Gorilla-Super-Glue-gram-Clear/dp/B082XGL21J/ref=sr_1_3?crid=1BD6VD9U8UIX4&dib=eyJ2IjoiMSJ9.WmdSkHMJoPzPqAPS6nmZI_3r_VvqevFgQDxE58u4N2IqD5w3xSR_cQmGHTTDGmKXYu_b3nN0ZHEiPMhIchQvcFmzezHM1TXGQTg8k9V2TdGBmZA1JS5Ds171K7-bEHf3NEeXndYmPb1vWEkDugqwbgQMmJ6aJtM9EHKeNRws9MWMG7iQe_ahuNSMd-Ep2dLhMB8rqZsj7ln5Cszgm_zy9AugcJbYu8iKDQyM95BZEWA.jx3-7qVA4YoO61aTyLvg6IQ9oajF916cGaELYo-KOvU&dib_tag=se&keywords=super+glue&qid=1746061719&sprefix=super%2Caps%2C167&sr=8-3) 
 
-<h4> Build Procedure <h4/>
+#### Build Procedure
+
 &nbsp;&nbsp;&nbsp;&nbsp; The initial phase of the project focused on constructing the physical structure of the scarecrow. This began with CAD modeling and 3D printing all necessary components. To ensure structural integrity, the top and bottom plates were adhesively bonded to the central chassis of the scarecrow using super glue, allowing adequate curing time for secure attachment. For the articulation mechanism, pilot holes were drilled into each of the yoke spacers using a precision drill bit. These holes allowed for the insertion of small eye hooks, which serve as mechanical linkage points for the scarecrow’s limbs. The component initially labeled “block” in the CAD files was later renamed “yoke spacer” for clarity. The yoke assembly was then inserted and fixed into place with adhesive. A 3D-printed pin was inserted through the rear opening of the body, and the assembly components (yoke spacer, yoke, and pin cap) were sequentially mounted onto the pin. This procedure was repeated for both N20 gear motor assemblies, ensuring symmetric actuation of the limbs. Following the installation of the yoke mechanisms, the N20 gear motors were positioned into their respective motor housings and secured. Scotch yokes were then mounted onto the motor output shafts and mechanically linked to the yoke assemblies. Additional eye bolts were threaded into the pre-drilled holes on the yoke spacers to establish the attachment points for the limbs. A close-up image of the scotch yoke mechanism used can be seen in Figure 2. The limb assembly utilized 12-inch bamboo dowels, which were cut in half to form both the arms and legs. Each dowel segment had a pilot hole drilled at one end to allow for the installation of J-hooks. The dowels were inserted through designated openings on the main body, and the J-hooks were connected to the eye bolts on the yoke spacers, completing the limb articulation system. For the head unit, two LEDs were embedded into a pumpkin-shaped enclosure to simulate eyes, and a passive infrared (PIR) motion sensor was installed to detect thermal activity on top. The neck component was affixed to the bottom of the head and then bonded to the top of the main body using adhesive. A post was subsequently glued to the bottom of the body to provide additional structural support and integration with the mobile platform. To complete the assembly, Velcro strips were attached to both the main body and its removable cover. This allows the internal wiring and electronic components to be concealed while still enabling easy access for maintenance or adjustments.
 <figure>  
 <p align="left">  
@@ -54,7 +55,7 @@ alt=" Scarecrow">
 
 ### RC Car
 
-<h4> Materials <h4/>
+#### Materials 
 
 * [3D printed car base](https://github.com/w-faulkner/ScarecrowProject/blob/main/Modeling%20Files/car_base.stl)
 * 2 – [140 RPM D.C. Hobby Gearmotors](https://www.sparkfun.com/hobby-gearmotor-140-rpm-pair.html)
@@ -64,13 +65,13 @@ alt=" Scarecrow">
 * 2 - [65 mm wheels](https://www.sparkfun.com/wheel-65mm-rubber-tire-pair.html)
 * 4 – [10-32 Machine Screws](https://www.mcmaster.com/90272A829/)
 
-<h4> Build Procedure <h4/>
+#### Build Procedure 
 
 &nbsp;&nbsp;&nbsp;&nbsp; The construction of the RC car base for the scarecrow platform involved a straightforward mechanical integration of components. A flange-mounted ball transfer unit was affixed to a pair of hex standoffs using two 10-32 machine screws. The opposing ends of the hex standoffs were then secured to the baseplate of the RC platform using an additional pair of 10-32 machine screws, forming a stable tricycle-style support configuration. To mount the DC hobby gear motors, Velcro strips were applied to both the flat surface of each motor casing and the inner surfaces of their respective motor tabs. This configuration provided a non-permanent but secure method of attachment, enabling straightforward removal and reinstallation during testing or maintenance. The motors were oriented such that the drive wheels extended beneath the car’s base, ensuring ground clearance and proper weight distribution.
 
 ### Wiring
 
-<h4> Materials <h4/>
+#### Materials 
 
 * 2 – [330 Ohm Resistors](https://www.sparkfun.com/resistor-330-ohm-1-4-watt-pth-20-pack-thick-leads.html)
 * [433 MHz Wireless Remote Control and Mini Receiver](https://www.amazon.com/dp/B09P89RF8R?ref=ppx_yo2ov_dt_b_fed_asin_title&th=1)
@@ -81,7 +82,7 @@ alt=" Scarecrow">
 * 2 – [10 by 30 row prototyping breadboards](https://www.sparkfun.com/breadboard-self-adhesive-white.html)
 * [Various wires with male and female connecting ends](https://www.amazon.com/Breadboard-Solderless-Prototype-Arduino-Project/dp/B09M9YFDQQ/ref=sr_1_1_sspa?crid=301V4DSVUESP6&dib=eyJ2IjoiMSJ9.LkNZzyQ3iQVu7_mBNBYzMjdjMkLE04VKB6-5wSRCVisc5j1Xfn9n1Jb8KC9EJ9Sm9p7MRXjsGXDBycSLjeU2tpJX2SD2yXNfVNZ40Xj-mHs6uf90PVlYSeBoyMBqumxh.CcUVzQTZCiDBZ8g-g2d8e1Zf1-vwKS2sQ_pFUutm24A&dib_tag=se&keywords=assorted+wires+with+male+and+female+connecting+ends+for+breadboard&qid=1746063384&s=hi&sprefix=assorted+wires+with+male+and+female+connecting+ends+for+breadboard%2Ctools%2C89&sr=1-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1)
 
-<h4> Build Procedure <h4/>
+#### Build Procedure 
 
 &nbsp;&nbsp;&nbsp;&nbsp; The electrical design of the system required the implementation of two independent circuits, each controlled by a dedicated Arduino Uno microcontroller (Figure 3). Due to the distinct and asynchronous functionalities of the scarecrow and the RC car platform, isolating these subsystems onto separate microcontrollers improved modularity and reduced the complexity of the wiring architecture. The primary circuit is responsible for the scarecrow’s functionality, encompassing the core actuation and sensing features. This circuit controlled the motion of the limbs via motor drivers and responded to motion input detected by the PIR sensor. Given the scope of its operation, special consideration was given to designing this control system in a streamlined and manageable manner to ensure reliability and ease of troubleshooting. To maintain a clean and organized wiring layout, the RC car control circuit was implemented on a separate Arduino Uno board. This decision eliminated the need for excessive wiring between distant components, thereby reducing electrical noise and physical clutter. The configuration of these circuits is based on earlier laboratory prototypes developed during the course, which informed the final layout and sequence of integration. As a result, the development of the RC subsystem was deferred until the final stages of the build, leveraging prior knowledge and successful test results.
  
