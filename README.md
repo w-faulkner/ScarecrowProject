@@ -104,6 +104,244 @@ alt=" R.C. Car Base Circuit">
 &nbsp;&nbsp;&nbsp;&nbsp; The mechanical design of the scarecrow body and the RC car base underwent multiple iterations to meet functional and practical requirements. Initial concepts aimed to translate the rotational motion of the DC motors into oscillatory limb movement using a traditional crank-arm mechanism. However, after early prototyping and performance analysis, the crank-arm design was replaced by a scotch yoke system. The scotch yoke mechanism proved to be superior for this application, offering simpler assembly, smoother operation, and more consistent motion output. Notably, it enables the generation of near-perfect simple harmonic motion, ensuring symmetrical and repeatable vertical displacement of the limbs with each motor cycle—an essential feature for the scarecrow’s deterrent effect. In parallel, the RC car platform also underwent critical revisions. The original steering configuration utilized a rigid front axle with dual 65 mm wheels (sourced from SparkFun), intended to improve maneuverability. However, due to the axle’s solid design, both wheels rotated in unison, causing significant resistance during turns and leading to frequent drag or complete steering failure. This issue was resolved by replacing the front axle assembly with a single ball transfer unit, which significantly improved the platform’s turning radius, acceleration response, and general mobility. Stability at higher speeds remained a concern due to the scarecrow’s elevated center of gravity. While mitigations were applied, further investigation into alternative front-end configurations such as dual independent wheel assemblies or articulated front steering would be pursued in extended development cycles. The electrical integration and control strategy also underwent several iterations. To ensure modularity and facilitate both mobility and autonomous scarecrow behavior, two Arduino Uno microcontrollers were utilized. The first microcontroller managed the scarecrow’s operation, including the LED “eyes,” PIR motion sensor, and the actuation of the arms and legs via DC gear motors. The second Arduino Uno controlled the RC car’s movement via a wireless remote control system comprising of a mini 4-channel receiver module and a corresponding handheld transmitter. The RC control interface was implemented using digital high/low signal mapping, where each button press on the transmitter triggered directional motion (forward, reverse, left, right) through corresponding motor outputs. Both microcontrollers were powered from a 4-cell AA battery pack, wired directly to one Arduino and daisy-chained to the second via the VIN and GND rails. While this configuration simplified power distribution and battery replacement, extended operation under full motor load resulted in significant current draw, leading to voltage drops and reduced operational duration. This observation suggests that future revisions should consider more robust power management solutions, including integrated rechargeable battery packs or solar charging modules to support sustained deployment in agricultural environments. To facilitate flexible operation modes, a single-pole dual-throw (SPDT) slider switch was added to toggle between manual operation and motion detection modes. In manual mode, the system allows for repositioning or transport without unintentional activation of the PIR-triggered motion system. Additionally, a momentary push-button switch was integrated to enable functional testing of the scarecrow’s LEDs and motor systems without relying on sensor input.
 
 ## Testing
+### Scarecrow Body Code
+```c
+/*
+  BAE 305
+  Automated Scarecrow Project
+  This is the code to control the the movements and LEDs on the scarecrow as well as motion detecting
+  By: Jacob Crabtree
+*/
+// Inputs
+const int switchPin = 7;  // SPDT switch
+const int buttonPin = 4;  // Button input
+const int pirPin = 2;     // PIR sensor input
+
+// LEDs
+const int redLED = 3;
+const int greenLED = 5;
+
+// Right motor
+const int AIN1 = 13;
+const int AIN2 = 12;
+const int PWMA = 11;
+
+// Left motor
+const int BIN1 = 8;
+const int BIN2 = 9;
+const int PWMB = 10;
+
+bool buttonPrevState = HIGH;  // Button is pulled up
+bool motionPrevState = LOW;
+
+enum Mode { BUTTON, MOTION };
+Mode currentMode = BUTTON;
+
+void setup() {
+  Serial.begin(9600);
+
+  pinMode(switchPin, INPUT);  // Read from SPDT switch
+  pinMode(buttonPin, INPUT_PULLUP);
+  pinMode(pirPin, INPUT);
+
+  pinMode(redLED, OUTPUT);
+  pinMode(greenLED, OUTPUT);
+
+  pinMode(AIN1, OUTPUT);
+  pinMode(AIN2, OUTPUT);
+  pinMode(PWMA, OUTPUT);
+  pinMode(BIN1, OUTPUT);
+  pinMode(BIN2, OUTPUT);
+  pinMode(PWMB, OUTPUT);
+
+  setGreen();
+  stopMotors();
+  Serial.println("Mode: BUTTON");
+}
+
+void loop() {
+  // Read switch position and set mode
+  bool switchState = digitalRead(switchPin);
+  Mode newMode = (switchState == LOW) ? BUTTON : MOTION;
+
+  // Change mode if necessary
+  if (newMode != currentMode) {
+    currentMode = newMode;
+    stopMotors();
+    setGreen();
+    Serial.print("Mode: ");
+    Serial.println(currentMode == BUTTON ? "BUTTON" : "MOTION");
+  }
+
+  // Button mode logic
+  if (currentMode == BUTTON) {
+    bool buttonPressed = digitalRead(buttonPin) == LOW;
+    if (buttonPressed && buttonPrevState == HIGH) {
+      Serial.println("Button pressed!");
+      runSequence();
+    }
+    buttonPrevState = buttonPressed;
+
+  } 
+  // Motion mode logic
+  else if (currentMode == MOTION) {
+    bool motionDetected = digitalRead(pirPin) == HIGH;
+    if (motionDetected && motionPrevState == LOW) {
+      Serial.println("Motion detected!");
+      runSequence();
+    }
+    motionPrevState = motionDetected;
+  }
+}
+
+void runSequence() {
+  setRed();
+  runMotors();
+  delay(7000);
+  stopMotors();
+  setGreen();
+}
+
+void runMotors() {
+  digitalWrite(AIN1, HIGH);
+  digitalWrite(AIN2, LOW);
+  analogWrite(PWMA, 255);
+
+  digitalWrite(BIN1, HIGH);
+  digitalWrite(BIN2, LOW);
+  analogWrite(PWMB, 255);
+}
+
+void stopMotors() {
+  analogWrite(PWMA, 0);
+  analogWrite(PWMB, 0);
+}
+
+void setRed() {
+  digitalWrite(redLED, HIGH);
+  digitalWrite(greenLED, LOW);
+}
+
+void setGreen() {
+  digitalWrite(redLED, LOW);
+  digitalWrite(greenLED, HIGH);
+}
+
+### R.C. Car Code
+```c
+/*
+  BAe 305
+  Automated Scarecrow Project
+  This is the code to control the R.C. Car base of the build
+  By: Jacob Crabtree
+*/
+// Motor driver pins
+const int AIN1 = 13; // Right motor
+const int AIN2 = 12;
+const int PWMA = 11;
+
+const int PWMB = 10; // Left motor
+const int BIN2 = 9;
+const int BIN1 = 8;
+
+// RF receiver inputs
+const int FORWARD_PIN = 2;
+const int BACKWARD_PIN = 3;
+const int LEFT_PIN = 4;
+const int RIGHT_PIN = 5;
+
+void setup() {
+  // Motor pins
+  pinMode(AIN1, OUTPUT);
+  pinMode(AIN2, OUTPUT);
+  pinMode(PWMA, OUTPUT);
+
+  pinMode(BIN1, OUTPUT);
+  pinMode(BIN2, OUTPUT);
+  pinMode(PWMB, OUTPUT);
+
+  // Receiver inputs
+  pinMode(FORWARD_PIN, INPUT);
+  pinMode(BACKWARD_PIN, INPUT);
+  pinMode(LEFT_PIN, INPUT);
+  pinMode(RIGHT_PIN, INPUT);
+
+  Serial.begin(9600);
+}
+
+void loop() {
+  bool forward = digitalRead(FORWARD_PIN);
+  bool backward = digitalRead(BACKWARD_PIN);
+  bool left = digitalRead(LEFT_PIN);
+  bool right = digitalRead(RIGHT_PIN);
+
+  // Stop motors by default
+  stopMotors();
+
+  if (forward) {
+    Serial.println("Forward");
+    moveForeward();
+  } else if (backward) {
+    Serial.println("Backward");
+    moveBackward();
+  } else if (left) {
+    Serial.println("Left");
+    turnLeft();
+  } else if (right) {
+    Serial.println("Right");
+    turnRight();
+  }
+
+  delay(50); // Small delay to avoid flooding serial monitor
+}
+
+// === Motor control functions ===
+
+void moveBackward() {
+  digitalWrite(AIN1, HIGH);
+  digitalWrite(AIN2, LOW);
+  analogWrite(PWMA, 255);  // Right motor at full speed
+
+  digitalWrite(BIN1, HIGH);
+  digitalWrite(BIN2, LOW);
+  analogWrite(PWMB, 255);  // Left motor at full speed
+}
+
+void moveForeward() {
+  digitalWrite(AIN1, LOW);
+  digitalWrite(AIN2, HIGH);
+  analogWrite(PWMA, 255);  // Right motor at full speed
+
+  digitalWrite(BIN1, LOW);
+  digitalWrite(BIN2, HIGH);
+  analogWrite(PWMB, 255);  // Left motor at full speed
+}
+
+void turnRight() {
+  digitalWrite(AIN1, LOW);
+  digitalWrite(AIN2, HIGH);
+  analogWrite(PWMA, 190);  // Right motor at full speed
+
+  digitalWrite(BIN1, LOW);
+  digitalWrite(BIN2, HIGH);
+  analogWrite(PWMB, 255);  // Left motor at full speed
+}
+
+void turnLeft() {
+  digitalWrite(AIN1, LOW);
+  digitalWrite(AIN2, HIGH);
+  analogWrite(PWMA, 255);  // Right motor at full speed
+
+  digitalWrite(BIN1, LOW);
+  digitalWrite(BIN2, HIGH);
+  analogWrite(PWMB, 190);  // Left motor at full speed
+}
+
+void stopMotors() {
+  analogWrite(PWMA, 0); // Stop right motor
+  analogWrite(PWMB, 0); // Stop left motor
+}
+
 
 ### Procedure 
 
