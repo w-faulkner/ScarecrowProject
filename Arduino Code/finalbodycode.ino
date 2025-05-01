@@ -1,3 +1,9 @@
+/*
+  BAe 305
+  Automated Scarecrow Project
+  This is the code to control the R.C. Car base of the build
+  By: Jacob Crabtree
+*/
 // Inputs
 const int switchPin = 7;  // SPDT switch
 const int buttonPin = 4;  // Button input
