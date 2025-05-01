@@ -226,6 +226,7 @@ void setGreen() {
   digitalWrite(redLED, LOW);
   digitalWrite(greenLED, HIGH);
 }
+```
 
 ### R.C. Car Code
 ```c
@@ -341,8 +342,7 @@ void stopMotors() {
   analogWrite(PWMA, 0); // Stop right motor
   analogWrite(PWMB, 0); // Stop left motor
 }
-
-
+```
 ### Procedure 
 
 &nbsp;&nbsp;&nbsp;&nbsp; To validate the functionality of the prototype, a systematic testing procedure was employed, beginning with the verification of the primary scarecrow subsystem. As the arm and leg actuators and LEDs were integrated into the control circuit, initial testing focused on verifying their coordinated operation. Upon initial execution, the system failed to respond as expected, necessitating code debugging and parameter tuning within the Arduino environment. Once revised, the updated firmware successfully enabled synchronized movement of the limbs and activation of the LEDs in response to motion input. Subsequent testing addressed the mobility of the RC car platform. Initial trials were conducted without the wireless receiver connected to ensure basic motor function and wiring integrity. Upon confirming proper motor operation, the wireless RC module was integrated into the system, and the code was updated to accommodate remote input signals. The platform demonstrated consistent forward and reverse movement, with limited but functional lateral steering. A final integration test was performed to simulate field deployment. The fully assembled system was navigated through a constructed obstacle course comprising tables, chairs, and miscellaneous obstructions. Upon reaching the designated position, the scarecrow was placed into “detection mode.” A heat-emitting object (i.e., a human hand) was then introduced at varying heights and distances to evaluate the range and responsiveness of the PIR sensor. Multiple trials were conducted to determine detection consistency across angles and distances representative of typical bird flight paths.
