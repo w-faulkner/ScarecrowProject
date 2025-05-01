@@ -1,3 +1,9 @@
+/*
+  BAe 305
+  Automated Scarecrow Project
+  This is the code to control the R.C. Car base of the build
+  By: Jacob Crabtree
+*/
 // Motor driver pins
 const int AIN1 = 13; // Right motor
 const int AIN2 = 12;
