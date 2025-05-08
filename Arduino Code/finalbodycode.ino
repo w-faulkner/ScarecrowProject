@@ -1,5 +1,5 @@
 /*
-  BAe 305
+  BAE 305
   Automated Scarecrow Project
   This is the code to control the the movements and LEDs on the scarecrow as well as motion detecting
   By: Jacob Crabtree
