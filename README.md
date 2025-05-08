@@ -7,6 +7,7 @@
 ## Summary
 &nbsp;&nbsp;&nbsp;&nbsp; The objective of this project was to design and implement an automated scarecrow system intended to assist farmers in deterring birds and minimizing crop yield losses. The system integrates a passive infrared (PIR) motion sensor, mounted on the head of the scarecrow. The PIR sensor can detect thermal movement from birds or other heat-emitting objects within its field of view. Upon motion detection, the system initiates a sequence that activates the DC motors that drive the movement of the scarecrow’s arms and legs, while a set of LEDs embedded in the head light up to enhance the scare effect. To provide mobility and remote operation, the entire scarecrow assembly is mounted on a motorized, remote-controlled (RC) platform. This platform is driven by two DC hobby gear motors, which are connected to a wireless control interface. The RC car is capable of multidirectional movement (forward, backward, left, and right) controlled by a handheld transmitter. This mobility allows the operator to reposition the scarecrow across a field or garden, which increases its effective coverage area and adaptability to different farming environments. The video that includes all the features of our automated scarecrow can be found [here](https://vimeo.com/1079489157/0302ad2d24?ts=0&share=copy).
 
+
 <figure>  
 <p align="left">  
 <img src="https://github.com/w-faulkner/ScarecrowProject/blob/main/Scarecrow%20Render.png" width="960" height="540" 
